@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # render new.rhtml
+	# render new.rhtml
   def new
     @user = User.new
   end
@@ -7,8 +7,12 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
-
-    success = @user && @user.save
+    
+		if params[:user][:name] == 'admin'
+		  success = @user && @user.save
+    else
+		  flash[:notice] = 'no actived user'
+		end
 
     if success && @user.errors.empty?
       

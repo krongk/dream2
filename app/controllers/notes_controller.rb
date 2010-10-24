@@ -59,7 +59,7 @@ class NotesController < ApplicationController
     @note = Note.new(params[:note])
 	  
     if @note.save
-       redirect_to(notes_path, :notice => 'Note was successfully created.') 
+       redirect_to("/notes", :notice => 'Note was successfully created.') 
     else
        render :action => "new" 
     end
@@ -86,7 +86,7 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
 			if @note.user_id == current_user.id || current_user.id == User.find_by_login('admin').id
 				@note.destroy
-				 redirect_to(notes_url, :notice => "deleted.") 
+				 redirect_to("/notes", :notice => "deleted.") 
 			else
 				redirect_to(notes_url, :notice => "No Permissions.")
 			end
