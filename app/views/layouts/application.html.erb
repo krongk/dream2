@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dream</title>
+  <style type="text/css">
+html * { font-size:100.01%; }
+textarea, pre, code, kbd, samp, var, tt {
+    font-family:Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier;
+  }
+  body {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:75.00%;
+    color:#444;
+  }
+  h1,h2,h3,h4,h5,h6 {
+    font-family:"Times New Roman", Times, serif;
+    font-weight:normal;
+    color:#222;
+    margin:0 0 0.25em 0;
+  }
+  h1 { font-size:200%; }                       /* 30px */
+  h2 { font-size:180%; }                       /* 24px */
+  h3 { font-size:150%; }                       /* 18px */
+  h4 { font-size:133.33%; }                    /* 16px */
+  h5 { font-size:116.67%; }                    /* 14px */
+  h6 { font-size:116.67%; }                    /* 14px */
+  ul, ol, dl { line-height:1.5em; margin:0 0 1em 1em; }
+  ul { list-style-type:disc; }
+  ul ul { list-style-type:circle; margin-bottom:0; }
+
+  ol { list-style-type:decimal; }
+  ol ol { list-style-type:lower-latin; margin-bottom:0; }
+
+  li { margin-left:0.8em; line-height:1.5em; }
+
+  dt { font-weight:bold; }
+  dd { margin:0 0 1em 0.8em; }
+
+  p { line-height:1.5em; margin:0 0 1em 0; }
+
+  strong,b { font-weight:bold; }
+
+  hr {
+    color:#fff;
+    background:transparent;
+    margin:0 0 0.5em 0;
+    padding:0 0 0.5em 0;
+    border:0;
+    border-bottom:1px #eee solid;
+  }
+
+  a { color:#4D87C7; background:transparent; text-decoration:none; }
+  a:visited  { color:#036; }
+
+  /* (en) maximum constrast for tab focus - change with great care */
+  /* (en) Maximaler Kontrast für Tab Focus - Ändern Sie diese Regel mit Bedacht */
+  a:focus { text-decoration:underline; color:#000; background: #fff; outline: 3px #f93 solid; }
+  a:hover,
+  a:active { color:#182E7A; text-decoration:underline; outline: 0 none; }
+div.field {
+  margin-bottom: 10px;
+}
+div.actions {
+  padding-top: 10px;
+}
+div.field_message textarea {
+  border: 2px solid #69F;
+}
+.notice {
+  color:#040;
+}
+.nav{margin:0px auto;background:#ffeecc;text-align:center;padding:4px;}
+.nav2{margin:0px auto;background:#ffcc00;text-align:center;padding:4px;}
+.main{margin:0 auto; width:100%;}
+	</style>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<div class="page_margins">
+  <div class="page">
+			<%if flash[:notice] -%><div class='notice'><%= flash[:notice] -%></div> <% end -%>
+      <div class="nav">
+        <%if logged_in? %>
+				<%=link_to 'Mys',"/notes?uid=#{current_user.id}"%>&nbsp;&nbsp;|&nbsp;&nbsp;
+			  <%=link_to 'Yours',"/notes?uid=#{@you.id}"%>&nbsp;&nbsp;|&nbsp;&nbsp;
+				<%= link_to 'Posts', '/posts' %>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <%=link_to 'logout', logout_path %>
+				<%else %><%=link_to 'login', login_path %><%end%></li>
+			</div>
+			
+      <div class="main">
+       <%= yield %>
+      </div>
+  </div>
+</div>
+</body>
+	<%= javascript_include_tag :all %>
+</html>

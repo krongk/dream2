@@ -1,0 +1,14 @@
+
+<% notes.each do |note| %>
+  <p> 
+    <b><%= User.find(note.user_id).login %></b>: <%= note.message %>
+	<br/><span style="color:blue;">
+	<%= note.id %>.<%=translate_time(note.updated_at) %>
+		&nbsp;<%= link_to 'E', edit_note_path(note) %>
+    &nbsp;<%= link_to 'D', note,:confirm => 'Are you sure?', :method => :delete %>
+  </span></p>
+	<hr/>
+<% end %>
+
+<%= will_paginate notes %>
+
