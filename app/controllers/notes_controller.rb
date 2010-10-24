@@ -58,14 +58,10 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(params[:note])
 	  
-    respond_to do |format|
-      if @note.save
-        format.html { redirect_to(notes_path, :notice => 'Note was successfully created.') }
-        format.xml  { render :xml => @note, :status => :created, :location => @note }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
-      end
+    if @note.save
+       redirect_to(notes_path, :notice => 'Note was successfully created.') 
+    else
+       render :action => "new" 
     end
   end
 
@@ -73,36 +69,27 @@ class NotesController < ApplicationController
   # PUT /notes/1.xml
   def update
     @note = Note.find(params[:id])
-
-    respond_to do |format|
 			if @note.user_id == current_user.id || current_user.id == User.find_by_login('admin').id
 					if @note.update_attributes(params[:note])
-						format.html { redirect_to(notes_url, :notice => 'Note was successfully updated.') }
-						format.xml  { head :ok }
+						redirect_to(notes_url, :notice => 'Note was successfully updated.') 
 					else
-						format.html { render :action => "edit" }
-						format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
+						render :action => "edit" 
 					end
 			else
-				format.html { redirect_to(root_url, :notice => "No Permissions.") }
+				redirect_to(root_url, :notice => "No Permissions.") 
 			end
-    end
   end
 
   # DELETE /notes/1
   # DELETE /notes/1.xml
   def destroy
     @note = Note.find(params[:id])
-		respond_to do |format|
 			if @note.user_id == current_user.id || current_user.id == User.find_by_login('admin').id
 				@note.destroy
-				format.html { redirect_to(notes_url) }
-				format.xml  { head :ok }
+				 redirect_to(notes_url, :notice => "deleted.") 
 			else
-				format.html {redirect_to(notes_url, :notice => "No Permissions.")}
-				format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
+				redirect_to(notes_url, :notice => "No Permissions.")
 			end
-    end
   end
 
 end

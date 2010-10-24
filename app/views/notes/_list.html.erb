@@ -5,7 +5,7 @@
 	<br/><span style="color:blue;">
 	<%= note.id %>.<%=translate_time(note.updated_at) %>
 		&nbsp;<%= link_to 'E', edit_note_path(note) %>
-    &nbsp;<%= link_to 'D', note,:confirm => 'Are you sure?', :method => :delete %>
+    &nbsp;<%= link_to 'D', note, :method => :delete %>
   </span></p>
 	<hr/>
 <% end %>
