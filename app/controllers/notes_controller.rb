@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   before_filter :login_required
   before_filter :load_couple
-  caches_action :index
+  #caches_action :index
 
   def load_couple
     User.find(2,3).each do |user|
@@ -57,7 +57,7 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.xml
   def create
-	  expire_action :action => :index
+	  #expire_action :action => :index
     @note = Note.new(params[:note])
 	  
     if @note.save
@@ -70,7 +70,7 @@ class NotesController < ApplicationController
   # PUT /notes/1
   # PUT /notes/1.xml
   def update
-	  expire_action :action => :index
+	 #expire_action :action => :index
     @note = Note.find(params[:id])
 			if @note.user_id == current_user.id || current_user.id == User.find_by_login('admin').id
 					if @note.update_attributes(params[:note])

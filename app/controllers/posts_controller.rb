@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_filter :login_required
   before_filter :load_couple
-  caches_action :index
+  #caches_action :index
 
   def load_couple
     User.find(2,3).each do |user|
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.xml
   def create
-	  expire_action :action => :index
+	  #expire_action :action => :index
     @post = Post.new(params[:post])
 
     respond_to do |format|
@@ -67,7 +67,7 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.xml
   def update
-	  expire_action :action => :index
+	  #expire_action :action => :index
     @post = Post.find(params[:id])
 
     respond_to do |format|
