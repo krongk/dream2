@@ -15,6 +15,10 @@ Laopo::Application.routes.draw do
 
   match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
   
+	match 'm' => 'sessions#m', :as => :m
+
+	match 'u' => 'sessions#u', :as => :u
+
   resources :notes
 
   # The priority is based upon order of creation:

@@ -1,8 +1,11 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
 
+	# mobile login file
+  def m
+  end
+	def u
+	end
   # render new.rhtml
   def new
   end
@@ -32,9 +35,6 @@ class SessionsController < ApplicationController
     redirect_back_or_default('/', :notice => "You have been logged out.")
   end
   
-	def hao123
-    logout_killing_session!
-	end
 protected
   # Track failed login attempts
   def note_failed_signin
