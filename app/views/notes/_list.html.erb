@@ -1,14 +1,15 @@
 
 <% notes.each do |note| %>
-  <p> 
-    <b><%= User.find(note.user_id).login %></b>: <%= note.message %>
-	<br/><span style="color:blue;">
-	<%= note.id %>.<%=translate_time(note.updated_at) %>
-		&nbsp;<%= link_to 'E', edit_note_path(note) %>
-    &nbsp;<%= link_to 'D', note, :method => :delete %>
-  </span></p>
+  <div class='note'> 
+		<div class="note-<%=User.find(note.user_id).login%>">&nbsp;</div>
+		<div class='note-message'><%= note.id %>. &nbsp;&nbsp;<%= note.message %></div>
+		<div class='note-menu'>
+		  <%=translate_time(note.updated_at) %>
+			&nbsp;<%= link_to 'E', edit_note_path(note) %>
+			&nbsp;<%= link_to 'D', note, :method => :delete %>
+		</div>
+	</div>
 	<hr/>
 <% end %>
 
 <%= will_paginate notes %>
-

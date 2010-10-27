@@ -26,7 +26,7 @@
   li { margin-left:0.8em; line-height:1.5em; }
   dt { font-weight:bold; }
   dd { margin:0 0 1em 0.8em; }
-  p { line-height:1.5em; margin:0 0 1em 0; }
+  p{ line-height:1.5em; margin:0 0 1em 0; }
   strong,b { font-weight:bold; }
   hr {
     color:#fff;
@@ -53,13 +53,49 @@
 	.notice {
 		color:#040;
 	}
+	.note-lopo {
+		background-image: url(images/cherry.jpg);
+		background-repeat: no-repeat;
+		height: 30px;
+		width: 30px;
+		text-align: center;
+		vertical-align: bottom;
+		color: #FFF;
+		float: left;
+		position: relative;
+		margin-top: 4px;
+		margin-right: 12px;
+		margin-bottom: 0px;
+		margin-left: 4px;
+}
+.note-logo {
+		background-image: url(images/sunflower.jpg);
+		background-repeat: no-repeat;
+		height: 30px;
+		width: 30px;
+		text-align: center;
+		vertical-align: bottom;
+		color: #FFF;
+		float: left;
+		position: relative;
+		margin-top: 4px;
+		margin-right: 12px;
+		margin-bottom: 0px;
+		margin-left: 4px;
+}
+.note-message {
+	font-size: 105%;
+}
+.note-menu {
+	color: #06C;
+}
 	.nav{margin:0px auto;background:#ffeecc;text-align:center;padding:4px;}
 	.nav2{margin:0px auto;background:#ffcc00;text-align:center;padding:4px;}
 	.main{margin:0 auto; width:100%;}
 </style>
 <%= csrf_meta_tag %>
 </head>
-<body>
+<body onload="key();">
 <div class="page_margins">
   <div class="page">
 			<%if flash[:notice] -%><div class='notice'><%= flash[:notice] -%></div> <% end -%>
@@ -77,5 +113,30 @@
   </div>
 </div>
 </body>
-<%=javascript_include_tag 'prototype', 'rails' %>
+<%=javascript_include_tag :all %>
+<script language='javascript'>
+//add the 'next' and 'previous' key board.
+function key(){
+  if (document.getElementsByClassName("previous_page"))
+  {
+		document.onkeydown = pageEvent;
+		var prevpage = document.getElementsByClassName("previous_page");
+		var nextpage = document.getElementsByClassName("next_page");
+		//var backpage = document.getElementById("go_back");
+
+		var re = new RegExp(/http:\/\//);
+
+		function pageEvent(evt){
+			evt = evt || window.event;
+			var key = evt.which || evt.keyCode;
+			if (prevpage[0] != null && nextpage[0] != null){
+				if (key == 37 && prevpage[0].match(re) ) location = prevpage[0];
+				if (key == 39 && nextpage[0].match(re) ) location = nextpage[0];
+				//if (key == 38 ) location = backpage
+			}
+		};
+	};
+};
+
+</script>
 </html>

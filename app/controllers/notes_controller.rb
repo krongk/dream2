@@ -61,7 +61,8 @@ class NotesController < ApplicationController
     @note = Note.new(params[:note])
 	  
     if @note.save
-       redirect_to("/notes", :notice => 'Note was successfully created.') 
+       #redirect_to("/notes", :notice => 'Note was successfully created.') 
+			 redirect_to "#{$SITE_URL}notes"
     else
        render :action => "new" 
     end
