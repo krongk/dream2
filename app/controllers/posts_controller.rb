@@ -52,11 +52,13 @@ class PostsController < ApplicationController
   def create
 	  #expire_action :action => :index
     @post = Post.new(params[:post])
-
+    
     respond_to do |format|
-      if @post.save
-        format.html { redirect_to(posts_url, :notice => 'Post was successfully created.') }
-        format.xml  { render :xml => @post, :status => :created, :location => @post }
+		  if @post.user_id == current_user.id
+        if @post.save
+					format.html { redirect_to(posts_url, :notice => 'Post was successfully created.') }
+					format.xml  { render :xml => @post, :status => :created, :location => @post }
+			  end
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }

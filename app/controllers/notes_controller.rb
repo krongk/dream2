@@ -13,8 +13,8 @@ class NotesController < ApplicationController
   # GET /notes.xml
   def index
     @note = Note.new
-    @notes = Note.paginate :page => params[:page] || 1, :per_page => 15, :order => 'id DESC'  
-		if params[:uid]
+    @notes = Note.paginate :page => params[:page] || 1, :per_page => 10, :order => 'id DESC'  
+		if params[:uid]  
 			if current_user.id != params[:uid].to_i
 				@notes = Note.paginate :conditions=>['user_id = ?',@you.id], :page => params[:page] || 1, :per_page => 10, :order => 'id DESC'  
 			else
@@ -23,6 +23,7 @@ class NotesController < ApplicationController
 		end
 	  respond_to do |format|
       format.html # index.html.erb
+			format.mobile { render :mobile => 'index.mobile.erb'}
       format.xml  { render :xml => @notes }
     end
   end
@@ -57,12 +58,12 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.xml
   def create
-	  #expire_action :action => :index
     @note = Note.new(params[:note])
-	  
-    if @note.save
-       #redirect_to("/notes", :notice => 'Note was successfully created.') 
-			 redirect_to "#{$SITE_URL}notes"
+	  if @note.user_id == current_user.id
+			if @note.save
+				 #redirect_to("/notes", :notice => 'Note was successfully created.') 
+				 redirect_to "#{$SITE_URL}notes"
+			end
     else
        render :action => "new" 
     end

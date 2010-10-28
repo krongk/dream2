@@ -113,31 +113,29 @@
   </div>
 </div>
 </body>
-<%= javascript_include_tag(:all) %>
+<%# javascript_include_tag :all %>
 <script language='javascript'>
 //add the 'next' and 'previous' key board.
 function key(){
-  document.getElementById("note_message").focus();
-
   if (document.getElementsByClassName("previous_page"))
-		{
-			document.onkeydown = pageEvent;
-			var prevpage = document.getElementsByClassName("previous_page");
-			var nextpage = document.getElementsByClassName("next_page");
-			//var backpage = document.getElementById("go_back");
+  {
+		document.onkeydown = pageEvent;
+		var prevpage = document.getElementsByClassName("previous_page");
+		var nextpage = document.getElementsByClassName("next_page");
+		//var backpage = document.getElementById("go_back");
 
-			var re = new RegExp(/http:\/\//);
+		var re = new RegExp(/http:\/\//);
 
-			function pageEvent(evt){
-				evt = evt || window.event;
-				var key = evt.which || evt.keyCode;
-				if (prevpage[0] != null && nextpage[0] != null){
-					if (key == 37 && prevpage[0].match(re) ) location = prevpage[0];
-					if (key == 39 && nextpage[0].match(re) ) location = nextpage[0];
-					//if (key == 38 ) location = backpage
-				}
-			};
+		function pageEvent(evt){
+			evt = evt || window.event;
+			var key = evt.which || evt.keyCode;
+			if (prevpage[0] != null && nextpage[0] != null){
+				if (key == 37 && prevpage[0].match(re) ) location = prevpage[0];
+				if (key == 39 && nextpage[0].match(re) ) location = nextpage[0];
+				//if (key == 38 ) location = backpage
+			}
 		};
+	};
 };
 
 </script>
