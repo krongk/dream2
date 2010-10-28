@@ -1,7 +1,9 @@
 
 <% notes.each do |note| %>
+  <%user = User.find(note.user_id) if User.exists?(note.user_id)%>
+  
   <div class='note'> 
-		<div class="note-">&nbsp;</div>
+		<div class="note-<%=user.login unless user.nil?%>">&nbsp;</div>
 		<div class='note-message'><%= note.id %>. &nbsp;&nbsp;<%= note.message %></div>
 		<div class='note-menu'>
 		  <%=translate_time(note.updated_at) %>
