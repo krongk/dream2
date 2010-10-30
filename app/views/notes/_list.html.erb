@@ -1,17 +1,16 @@
 
+<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="d" data-counttheme="e">
 <% notes.each do |note| %>
   <%user = User.find(note.user_id) if User.exists?(note.user_id)%>
-  
-  <div class='note'> 
-		<div class="note-<%=user.login unless user.nil?%>">&nbsp;</div>
-		<div class='note-message'><%= note.id %>. &nbsp;&nbsp;<%= note.message %></div>
-		<div class='note-menu'>
+  <li>
+		<%if user.login == 'lopo' -%>
+		<img src="/images/cherry.jpg" class="ui-li-icon"/>
+		<%else -%><img src="/images/sunflower.jpg" class="ui-li-icon"/><%end -%>
+		<h3><%=link_to "  #{note.message}", note %></h3>
+		<div class='ui-li-count'>
 		  <%=translate_time(note.updated_at) %>
-			&nbsp;<%= link_to 'E', edit_note_path(note) %>
-			&nbsp;<%= link_to 'D', note, :method => :delete %>
 		</div>
-	</div>
-	<hr/>
+	</li>
 <% end %>
-
+</ul>
 <%= will_paginate notes %>

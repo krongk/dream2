@@ -1,4 +1,8 @@
+<%content_for :header do -%>
+   <h1>微博</h1>
+	 <%= link_to 'Delete', @note, :method => :delete, "data-icon" => "delete", "class" => "ui-btn-right" %>
+<%end -%>
+
 <p>
   <%= @note.message %>
 </p>
-<%= link_to 'Back', notes_path %>

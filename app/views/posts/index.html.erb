@@ -1,5 +1,9 @@
-<div id='posts' class='list'>
-<div class='nav2'><%= link_to 'New Post', new_post_path %></div>
+<%content_for :header do -%>
+   <h1>日志</h1>
+	 <%= link_to 'Add', new_post_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
+<%end -%>
+
+
 <% @posts.each do |post| %>
  <div class='item'>
 	<h2><%= post.title %></h2>
@@ -16,5 +20,5 @@
 	<hr/>
  </div>
 <% end %>
-</div>
+
 <%= will_paginate @posts %>

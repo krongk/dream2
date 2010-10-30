@@ -1,3 +1,5 @@
-<%= render 'form' %>
+<%content_for menu do %>
+  <%= link_to 'Delete', @note, :method => :delete, "data-icon" => "delete", "class" => "ui-btn-right" %>
+<%end%>
 
-<%= link_to 'Back', notes_path %>
+<%= render 'form' %>

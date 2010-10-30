@@ -1,3 +1,8 @@
+<%content_for :header do -%>
+   <h1>快捷登录</h1>
+	 <%= link_to 'Home', notes_url, "class" => "ui-btn-right" %>
+<%end -%>
+
 <%= form_tag session_path do -%>
 <p>
 <%= hidden_field_tag 'login', 'logo' %></p>

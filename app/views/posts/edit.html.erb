@@ -1,6 +1,6 @@
-<h1>Editing post</h1>
+<%content_for :header do -%>
+   <h1>编辑日志</h1>
+	 <%= link_to 'Home', posts_url, "class" => "ui-btn-right" %>
+<%end -%>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @post %> |
-<%= link_to 'Back', posts_path %>
