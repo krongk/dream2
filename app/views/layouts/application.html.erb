@@ -17,10 +17,13 @@
 	  <%if flash[:notice] -%><div class='notice'><%= flash[:notice] -%></div> <% end -%>
     <%= yield %>
   </div>
-	<div data-role="footer" >
+	<div data-role="footer"><%if logged_in? -%>
    <%= link_to '日志', '/posts', "data-icon" => "gear"  %>
 	 <%=link_to '微博',"/notes", "data-icon" => "gear"%>
-	 <%=link_to '退出', logout_path, "data-icon" => "check", "data-theme" =>"e", "class" => "ui-btn-right" -%>
+	 <%=link_to '退出', logout_path, "data-icon" => "check", "data-theme" =>"e"-%>
+	 <%else -%>
+	  &copy; inruby.
+	 <%end -%>
 	</div>
 </div>
 </body>
