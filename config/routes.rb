@@ -1,5 +1,7 @@
 Laopo::Application.routes.draw do
-  resources :posts
+  resources :comments
+
+  resources :posts, :has_many => :comments
 
   resources :users
 

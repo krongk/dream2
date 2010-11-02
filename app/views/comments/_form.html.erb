@@ -1,0 +1,7 @@
+<% form_for(comment) do |f|%>
+	<%=f.hidden_field :post, :value => post.id%>
+	<%=f.hidden_field :user, :value => current_user.id %>
+	<%=f.hidden_field :url, :value => request.url %>
+	<%=f.text_area :content, :style => 'width:99%;'%>
+	<%= submit_tag " love you ", "data-role" => "button", "data-inline" => "true" %>
+<%end%>

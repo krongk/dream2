@@ -3,9 +3,8 @@
 	 <%= link_to 'Add', new_post_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
 <%end -%>
 
-
 <% @posts.each do |post| %>
- <div class='item'>
+ <li>
 	<h2><%= post.title %></h2>
 	<p style='color:blue;'>
 	  <%= post.user.login unless post.user.nil? %>&nbsp;
@@ -16,9 +15,24 @@
 	</span>
 	</p>
 	<p><%= simple_format post.message %></p>
-	
-	<hr/>
- </div>
+	</li>
+	<br/>
+
+	<ul data-role="listview" data-inset="true" data-theme="e" >
+	<% unless post.comments.empty?%>
+		<% post.comments.each do |c|%>
+				<li><%= c.content%> 
+				<%= link_to ' ', c, :confirm => "#{c.content}\n\n要删除该评论吗？", :method => :delete %>
+				<div class='ui-li-count'>
+					<%=translate_time(c.updated_at) %>
+				</div>
+				</li>
+		<% end%>
+	<%end%>
+	</ul>
+
+<%=render :partial=>'comments/form',:locals=>{:post => post, :comment => post.comments.build}%>
+
 <% end %>
 
 <%= will_paginate @posts %>
