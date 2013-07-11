@@ -4,8 +4,8 @@
   <%user = User.find(note.user_id) if User.exists?(note.user_id)%>
   <li>
 		<%if user.login == 'lopo' -%>
-		<img src="/images/cherry.jpg" class="ui-li-icon"/>
-		<%else -%><img src="/images/sunflower.jpg" class="ui-li-icon"/><%end -%>
+		<img src="/assets/cherry.jpg" class="ui-li-icon"/>
+		<%else -%><img src="/assets/sunflower.jpg" class="ui-li-icon"/><%end -%>
 		<h3><%=link_to "  #{note.message}", note %></h3>
 		<div class='ui-li-count'>
 		  <%=translate_time(note.updated_at) %>
@@ -13,4 +13,3 @@
 	</li>
 <% end %>
 </ul>
-<%= will_paginate notes %>

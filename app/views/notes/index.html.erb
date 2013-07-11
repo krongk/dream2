@@ -4,3 +4,10 @@
 <%end -%>
 
 <%= render :partial => 'list', :locals=>{:notes => @notes} %>
+
+<%#= will_paginate notes %>
+<div class="morelink">
+  <% if @page %>
+    <a href="/?page=<%=@page+1%>"><%=@page+1%>下一页</a>
+  <% end %>
+</div>

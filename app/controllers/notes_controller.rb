@@ -2,6 +2,7 @@ class NotesController < ApplicationController
   before_filter :login_required
   before_filter :load_couple
   #caches_action :index
+  NOTES_PER_PAGE = 3
 
   def load_couple
     User.find(2,3).each do |user|
@@ -9,20 +10,21 @@ class NotesController < ApplicationController
     end
 		@you = User.find(1) if @you.nil?
   end
+  
   # GET /notes
   # GET /notes.xml
   def index
     @note = Note.new
     #@notes = Note.paginate(:page => params[:page] || 1, :per_page => 8)
-    @notes = Note.page(params[:page] || 1)
+    @notes = find_notes
 
-		if params[:uid]  
-			if current_user.id != params[:uid].to_i
-				@notes = Note.paginate :conditions=>['user_id = ?',@you.id], :page => params[:page] || 1, :per_page => 10, :order => 'id DESC'  
-			else
-				@notes = Note.paginate :conditions=>['user_id = ?',current_user.id], :page => params[:page] || 1, :per_page => 10, :order => 'id DESC' 
-			end
-		end
+		# if params[:uid]  
+		# 	if current_user.id != params[:uid].to_i
+		# 		@notes = Note.paginate :conditions=>['user_id = ?',@you.id], :page => params[:page] || 1, :per_page => 10, :order => 'id DESC'  
+		# 	else
+		# 		@notes = Note.paginate :conditions=>['user_id = ?',current_user.id], :page => params[:page] || 1, :per_page => 10, :order => 'id DESC' 
+		# 	end
+		# end
 	  respond_to do |format|
       format.html # index.html.erb
 			format.mobile { render :mobile => 'index.mobile.erb'}
@@ -30,6 +32,32 @@ class NotesController < ApplicationController
     end
   end
 
+  def find_notes
+    @page = 1
+    if params[:page].to_i > 0
+      @page = params[:page].to_i
+    end
+
+    conds = [ "true " ]
+    if params[:uid]  
+      if current_user.id != params[:uid].to_i
+        conds[0] << " AND user_id = ?"
+        conds.push @you.id
+      else
+        conds[0] << " AND user_id = ?"
+        conds.push current_user.id
+      end
+    end
+
+    notes = Note.find(
+      :all,
+      :conditions => conds,
+      :limit => NOTES_PER_PAGE + 1,
+      :offset => ((@page - 1) * NOTES_PER_PAGE),
+      :order => (" id DESC")
+    )
+    notes
+  end
   # GET /notes/1
   # GET /notes/1.xml
   def show
