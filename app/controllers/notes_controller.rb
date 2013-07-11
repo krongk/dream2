@@ -13,7 +13,9 @@ class NotesController < ApplicationController
   # GET /notes.xml
   def index
     @note = Note.new
-    @notes = Note.paginate :page => params[:page] || 1, :per_page => 8, :order => 'id DESC'  
+    #@notes = Note.paginate(:page => params[:page] || 1, :per_page => 8)
+    @notes = Note.page(params[:page] || 1)
+
 		if params[:uid]  
 			if current_user.id != params[:uid].to_i
 				@notes = Note.paginate :conditions=>['user_id = ?',@you.id], :page => params[:page] || 1, :per_page => 10, :order => 'id DESC'  

@@ -1,5 +1,11 @@
 1. add three users
   - first one for 'admin'
   - next two for 'lopo' and 'logo'
-2¡£http://jquerymobile.com
-3¡£http://fuelyourcoding.com/getting-started-with-jquery-mobile-rails-3/comment-page-1/#comment-4089
+
+User.create(:login => 'admin', :name => 'admin', :email => 'admin@dream2.com', :password => 'xxx', :password_confirmation => 'xxx')
+User.create(:login => 'lopo', :name => 'lopo', :email => 'lopo@dream2.com', :password => 'xxx', :password_confirmation => 'xxx')
+User.create(:login => 'logo', :name => 'logo', :email => 'logo@dream2.com', :password => 'xxx', :password_confirmation => 'xxx')
+
+2. http://jquerymobile.com
+
+3. http://fuelyourcoding.com/getting-started-with-jquery-mobile-rails-3/comment-page-1/#comment-4089

@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 	# GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.paginate :page=>params[:page] || 1, :per_page => 1, :order => 'id DESC'
+    @posts = Post.order('id DESC').page(params[:page] || 1)
 
     respond_to do |format|
       format.html # index.html.erb

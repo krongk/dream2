@@ -6,4 +6,4 @@ class ApplicationController < ActionController::Base
   has_mobile_fu 
 end
 
-$SITE_URL =  "/" || "http://dream2.heroku.com/"
+$SITE_URL =  "/" || "localhost:3000"
